@@ -34,7 +34,7 @@ class Create extends Component {
             // This means that there IS a JWT so someone must be logged in.
             console.log('jwt FOUND on local storage');
 
-            axios.post('http://localhost:3000/verifyjwt', {
+            axios.post('https://secure-notes-backend.herokuapp.com/verifyjwt', {
 
                 auth_token: authToken
             })
@@ -80,7 +80,7 @@ class Create extends Component {
                 this.setState({ spinnerStatus: true });
                 //
                 let authToken = localStorage.getItem("securevault_JWT");
-                axios.post('http://localhost:3000/encrypt', {
+                axios.post('https://secure-notes-backend.herokuapp.com/encrypt', {
 
                     auth_token: authToken,
                     email: email,
