@@ -36,7 +36,7 @@ class MyNotes extends Component {
             // This means that there IS a JWT so someone must be logged in.
             console.log('jwt FOUND on local storage');
 
-            axios.post(proxy+'/verifyjwt', {
+            axios.post('https://secure-notes-backend.herokuapp.com/verifyjwt', {
 
                 auth_token: authToken
             })
@@ -60,7 +60,7 @@ class MyNotes extends Component {
     fetchNotes(authToken) {
         console.log('from axiosa  ');
         //
-        axios.post(proxy+'/mynotes', {
+        axios.post('https://secure-notes-backend.herokuapp.com/mynotes', {
 
             auth_token: authToken
         })
@@ -106,7 +106,7 @@ class MyNotes extends Component {
                 }
             );
 
-            axios.post(proxy+'/login', {
+            axios.post('https://secure-notes-backend.herokuapp.com/login', {
                 email: email,
                 password: password
             })
