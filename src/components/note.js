@@ -42,7 +42,7 @@ class Note extends Component {
 
     fetchNotes(authToken) {
         //
-        axios.post('http://localhost:3000/mynotes', {
+        axios.post('https://secure-notes-backend.herokuapp.com/mynotes', {
 
             auth_token: authToken
         })
@@ -83,7 +83,7 @@ class Note extends Component {
                 }
             );
 
-            axios.post('http://localhost:3000/login', {
+            axios.post('https://secure-notes-backend.herokuapp.com/login', {
                 email: email,
                 password: password
             })
@@ -144,7 +144,7 @@ class Note extends Component {
                 this.setState({ spinnerStatus: true });
                 //
                 let authToken = localStorage.getItem("securevault_JWT");
-                axios.post('http://localhost:3000/decrypt', {
+                axios.post('https://secure-notes-backend.herokuapp.com/decrypt', {
 
                     auth_token: authToken,
                     email: this.state.email,
@@ -183,7 +183,7 @@ class Note extends Component {
                 if (willDelete) {
                     //
                     let authToken = localStorage.getItem("securevault_JWT");
-                    axios.post('http://localhost:3000/delete', {
+                    axios.post('https://secure-notes-backend.herokuapp.com/delete', {
 
                         auth_token: authToken,
                         id: this.props.id
