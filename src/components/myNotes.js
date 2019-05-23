@@ -6,7 +6,7 @@ import DropdownComponent from '../components/dropdown';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 
-
+let proxy = process.env.BACKEND_LINK;
 
 
 class MyNotes extends Component {
@@ -36,7 +36,7 @@ class MyNotes extends Component {
             // This means that there IS a JWT so someone must be logged in.
             console.log('jwt FOUND on local storage');
 
-            axios.post('http://localhost:3000/verifyjwt', {
+            axios.post(proxy+'/verifyjwt', {
 
                 auth_token: authToken
             })
@@ -60,7 +60,7 @@ class MyNotes extends Component {
     fetchNotes(authToken) {
         console.log('from axiosa  ');
         //
-        axios.post('http://localhost:3000/mynotes', {
+        axios.post(proxy+'/mynotes', {
 
             auth_token: authToken
         })
@@ -106,7 +106,7 @@ class MyNotes extends Component {
                 }
             );
 
-            axios.post('http://localhost:3000/login', {
+            axios.post(proxy+'/login', {
                 email: email,
                 password: password
             })
