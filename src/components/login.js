@@ -3,6 +3,8 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
+let proxy = process.env.BACKEND_LINK;
+
 
 
 class Login extends Component {
@@ -31,7 +33,7 @@ class Login extends Component {
             // This means that there IS a JWT so someone must be logged in.
             console.log('jwt FOUND on local storage');
 
-            axios.post('http://localhost:3000/verifyjwt', {
+            axios.post(proxy+'/verifyjwt', {
        
                 auth_token : authToken
               })
@@ -70,7 +72,7 @@ class Login extends Component {
                 }
             );
 
-            axios.post('http://localhost:3000/login', {
+            axios.post(proxy+'/login', {
                 email: email,
                 password: password
             })
