@@ -262,7 +262,7 @@ class Note extends Component {
                 this.setState({ updateSpinnerStatus: true });
                 //
                 let authToken = localStorage.getItem("securevault_JWT");
-                axios.post('http://localhost:3000/update', {
+                axios.post('https://secure-notes-backend.herokuapp.com/update', {
 
                     auth_token: authToken,
                     email: email,
