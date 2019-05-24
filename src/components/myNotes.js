@@ -16,7 +16,8 @@ class MyNotes extends Component {
         this.state = {
             response: [],
             flag: 'ankit',
-            showNoMessage: false
+            showNoMessage: false,
+            showSpinner:true
 
         }
 
@@ -25,7 +26,7 @@ class MyNotes extends Component {
     }
 
     componentDidMount() {
-        console.log('component did mount of my account page');
+        console.log('component did mount of my notes page');
         let authToken = localStorage.getItem("securevault_JWT");
         if (authToken === null) {
             // This means that there ISN'T JWT and no user is logged in.
@@ -69,16 +70,20 @@ class MyNotes extends Component {
                 if (response.data.length == 0) {
                     console.log('nothing to disp');
                     this.setState({ showNoMessage: true });
-                    return;  
+                    return;
                 }
                 this.setState({
                     response: response,
-                    flag: 'abhinav'
+                    flag: 'abhinav',
+                    showSpinner:false
                 });
 
 
             }.bind(this))
             .catch(function (error) {
+                this.setState({
+                    showSpinner:false
+                });
                 // this.props.history.push('/login');
                 // swal(error.response.data.status);
                 console.log(error.response.data.status);
@@ -177,42 +182,47 @@ class MyNotes extends Component {
         }
 
         return (
-            <div class='container' style={componemtStyle}>
+            <div>
 
-                <div class='row'>
+                <DropdownComponent />
 
-                    <div class='col m2 s3 right-align'>
-                        <div class='right-align'>
-                            <Link to='/create'>
-                                <a class="waves-effect waves-light btn">
-                                    <i class="material-icons">add</i>
-                                </a>
-                            </Link>
-
+                {this.state.showSpinner &&
+                    <div class='row'>
+                         <div class='center-align'>
+                         <div class="preloader-wrapper small active">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div><div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div><div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
                         </div>
+                         </div>
+                        
                     </div>
-                    <div class='col m2 s3 right-align offset m9'>
-                        <div class='right-align'>
-                            <DropdownComponent />
-                        </div>
-                    </div>
-                </div>
 
-                {!this.state.showNoMessage &&
+                }
+
+                {
+                    !this.state.showNoMessage &&
                     <div>
                         <ul class="collapsible popout">
                             {mynotes}
                         </ul>
                     </div>
                 }
-                {this.state.showNoMessage &&
+                {
+                    this.state.showNoMessage &&
                     <div>
                         <p>You don't have any notes, create notes by clicking add notes button above</p>
                     </div>
                 }
 
 
-            </div>
+            </div >
 
 
         );

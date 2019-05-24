@@ -31,7 +31,7 @@ class Register extends Component {
             // This means that there IS a JWT so someone must be logged in.
             console.log('jwt FOUND on local storage');
 
-            axios.post('http://localhost:3000/verifyjwt', {
+            axios.post('https://secure-notes-backend.herokuapp.com/verifyjwt', {
        
                 auth_token : authToken
               })
@@ -82,7 +82,7 @@ class Register extends Component {
             );
             swal('everything is all right');
 
-            axios.post('http://localhost:3000/register', {
+            axios.post('https://secure-notes-backend.herokuapp.com/register', {
                 name :name,
                 email:email,
                 password:password,

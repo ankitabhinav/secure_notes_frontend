@@ -11,7 +11,7 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <div class="container" style={componemtStyle}>
+        <div  >
            <p>This is home page oif secure vault</p>
         </div>
       </div>
