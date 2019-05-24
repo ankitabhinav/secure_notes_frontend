@@ -93,7 +93,8 @@ class Create extends Component {
                         console.log(response);
                         if (response.status == 200) {
                             swal('Saved Successfully', '', 'success');
-                            this.setState({ spinnerStatus: false })
+                            this.setState({ spinnerStatus: false });
+                            this.props.history.push('/notes');
                         }
 
                     }.bind(this))
@@ -117,32 +118,16 @@ class Create extends Component {
 
         let componemtStyle = {
             onErrorTextColor: { color: this.state.OnErrorStyle },
-            'margin-top': '10%',
+
             'background-color': ''
         }
 
         return (
-            <div class='container' style={componemtStyle}>
+            <div class='' style={componemtStyle}>
 
                 <div class='row'>
 
-                    <div class='col m2 s3 right-align'>
-                        <div class='right-align'>
-                            <Link to='/notes'>
-                                <a class="waves-effect waves-light btn">
-                                    <i class="material-icons">arrow_back</i>
-                                </a>
-                            </Link>
-
-                        </div>
-                    </div>
-                    <div class='col m2 s3 right-align offset m9'>
-                        <div class='right-align'>
-                            <DropdownComponent />
-                        </div>
-                    </div>
-
-
+                    <DropdownComponent />
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
@@ -161,23 +146,31 @@ class Create extends Component {
                 <div>
                     <div class="right-align">
                         {!this.state.spinnerStatus &&
-                            <a onClick={this.saveNote} class="waves-effect waves-light btn ">
-                                Save
-                    </a>
+                            <React.Fragment>
+                                <a onClick={this.saveNote} class="waves-effect waves-light btn ">
+                                    Save
+                             </a>
+                                {"  "}
+                                <Link to='/notes'> <a class="waves-effect waves-light btn ">
+                                    Cancel
+                                 </a>
+                                </Link>
+                            </React.Fragment>
+
                         }
 
                         {this.state.spinnerStatus &&
-                             <div class="preloader-wrapper small active">
-                             <div class="spinner-layer spinner-green-only">
-                               <div class="circle-clipper left">
-                                 <div class="circle"></div>
-                               </div><div class="gap-patch">
-                                 <div class="circle"></div>
-                               </div><div class="circle-clipper right">
-                                 <div class="circle"></div>
-                               </div>
-                             </div>
-                           </div>
+                            <div class="preloader-wrapper small active">
+                                <div class="spinner-layer spinner-green-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div><div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div><div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
+                            </div>
                         }
 
                     </div>

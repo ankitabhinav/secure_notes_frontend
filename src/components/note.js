@@ -24,6 +24,7 @@ class Note extends Component {
         this.deleteMessage = this.deleteMessage.bind(this);
         this.updateMessage = this.updateMessage.bind(this);
         this.saveNote = this.saveNote.bind(this);
+        this.hideUpdateSection  = this.hideUpdateSection.bind(this); 
     }
 
     componentDidMount() {
@@ -238,6 +239,12 @@ class Note extends Component {
         return strTime;
     }
 
+    hideUpdateSection() {
+        this.setState({
+            showUpdate:false
+        });
+    }
+
     saveNote() {
 
         let data = document.getElementById('messageToBeEncrypted').value;
@@ -279,12 +286,12 @@ class Note extends Component {
 
 
                             this.setState(
-                                { 
+                                {
                                     updateSpinnerStatus: false,
                                     data: response.data.note,
                                     decryptStatus: false,
-                                    title:title,
-                                    showComponent: true, 
+                                    title: title,
+                                    showComponent: true,
                                     showUpdate: false
                                 })
                         }
@@ -310,7 +317,7 @@ class Note extends Component {
 
         let componemtStyle = {
             onErrorTextColor: { color: this.state.OnErrorStyle },
-            timeAndDecrypt: { 'padding-bottom': '30px' },
+            timeAndDecrypt: { 'padding-bottom': '5px' },
             noteStyle: { 'word-wrap': 'break-word' },
             'margin-top': '10%',
             'background-color': ''
@@ -354,12 +361,11 @@ class Note extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </div>
                                     <div class='row'>
                                         {this.state.updateSpinnerStatus &&
-                                            <div class="preloader-wrapper small active">
+                                        <div class='center-align'>
+                                            <div class="preloader-wrapper small active ">
                                                 <div class="spinner-layer spinner-green-only">
                                                     <div class="circle-clipper left">
                                                         <div class="circle"></div>
@@ -370,13 +376,22 @@ class Note extends Component {
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                            
                                         }
-                                         {!this.state.updateSpinnerStatus && 
-                                             <a onClick={this.saveNote} class="waves-effect waves-light btn ">
-                                             Save
-                                          </a>
+                                        {!this.state.updateSpinnerStatus &&
+                                            <React.Fragment>
+                                                <a onClick={this.saveNote} class="waves-effect waves-light btn ">
+                                                    Save
+                                                </a>
+                                                 {"  "} {/* the line adds 3 spaces */}
+                                                <a onClick={this.hideUpdateSection} class="waves-effect waves-light btn ">
+                                                   Cancel
+                                                </a>
+                                            </React.Fragment>
+
                                         }
-                                       
+
                                     </div>
                                 </React.Fragment>
 
@@ -408,13 +423,20 @@ class Note extends Component {
 
 
                                         <React.Fragment>
+                                            <div class='row'>
+                                                <div class='section'>
+                                                    <a onClick={this.decryptMessage} class="waves-effect waves-light btn-small" disabled={this.state.decryptStatus}>Decrypt</a>
+                                                </div>
+                                                <div class='section'>
+                                                    <a onClick={this.deleteMessage} class="waves-effect waves-light btn-small" disabled={this.state.showUpdate}>Delete</a>
+                                                </div>
+                                                <div class='section'>
+                                                    {this.state.decryptStatus &&
+                                                        <a onClick={this.updateMessage} class="waves-effect waves-light btn-small" disabled={this.state.showUpdate}>Update</a>
+                                                    }
+                                                </div>
 
-                                            <a onClick={this.decryptMessage} class="waves-effect waves-light btn-small" disabled={this.state.decryptStatus}>Decrypt</a>
-                                            <a onClick={this.deleteMessage} class="waves-effect waves-light btn-small" disabled={this.state.showUpdate}>Delete</a>
-
-                                            {this.state.decryptStatus &&
-                                                <a onClick={this.updateMessage} class="waves-effect waves-light btn-small" disabled={this.state.showUpdate}>Update</a>
-                                            }
+                                            </div>
 
                                         </React.Fragment>
 
