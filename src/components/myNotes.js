@@ -72,7 +72,7 @@ class MyNotes extends Component {
                     this.setState({ showNoMessage: true });
                     return;
                 }
-                if (response.data.status) {
+                if (response.status == 400) {
                     console.log('nothing to disp');
                     swal(response.data.status);
                     this.setState({ showNoMessage: true });
