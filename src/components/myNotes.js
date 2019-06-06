@@ -72,6 +72,12 @@ class MyNotes extends Component {
                     this.setState({ showNoMessage: true });
                     return;
                 }
+                if (response.data.status) {
+                    console.log('nothing to disp');
+                    swal(response.data.status);
+                    this.setState({ showNoMessage: true });
+                    return;
+                }
                 this.setState({
                     response: response,
                     flag: 'abhinav',
